@@ -3,16 +3,13 @@ package service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.ProductDao;
 import dto.ProductDto;
-import dto.ProductDto;
-import entity.Customer;
 import entity.ProductPK;
-import entity.ProductPK;
-import entity.Product;
 import entity.Product;
 import service.ProductSvc;
 
@@ -20,6 +17,7 @@ import service.ProductSvc;
 @Transactional
 public class ProductSvcImpl implements ProductSvc {
 
+	@Autowired 
 	private ProductDao productDao;
 	
 	@Override

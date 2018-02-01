@@ -1,0 +1,26 @@
+<?page title="Product" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="new page title" border="normal" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('vmd.ProductVmd')">
+	
+	
+	  		<listbox model="@load(vm.productDtos)" selectedItem="@bind(vm.productDto)" emptyMessage="kosong">
+			<listhead>
+				<listheader label="Product Id"></listheader>
+				<listheader label="Name"></listheader>
+				<listheader label="Price"></listheader>
+				<listheader label="Exp Date"></listheader>
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.prodId)"/>
+					<listcell label="@load(each.prodName)"/>
+					<listcell label="@load(each.prodPrice)"/>
+					<listcell label="@load(each.expDate)"/>
+				</listitem>
+			</template>
+		</listbox>
+	 
+		
+	</window>
+</zk>

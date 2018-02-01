@@ -1,0 +1,81 @@
+<?page title="Kalkulator" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<style>
+		.sysWin .z-window-embedded-cnt , .sysWin
+		.z-window-overlapped-cnt, .sysWin .z-window-popup-cnt {padding:
+		0px;}
+	</style>
+	<div height="380px">
+		<window id="win" border="normal" width="300px" minheight="300"
+			sclass="sysWin">
+			<caption label="Calculator" image="imgs/kal.png" />
+			<borderlayout height="40px">
+				<north border="none">
+					<menubar id="menubar" width="100%">
+						<menu label="View"></menu>
+						<menu label="Edit"></menu>
+						<menu label="Help"></menu>
+					</menubar>
+				</north>
+			</borderlayout>
+			<doublebox id="doub" width="280px" height="100px"
+				format="#,##0.##" constraint="no empty">
+			</doublebox>
+			<separator></separator>
+			<grid>
+			<columns>
+			<column width="20%"/>
+			<column width="20%"/>
+			<column width="20%"/>
+			<column width="20%"/>
+			<column width="20%"/>
+			</columns>
+			<rows>
+			<row>
+			<button id="btn1" width="10" height="10" label="MC" />
+			<button id="btn2" width="10" height="10" label="MR" />
+			<button id="btn3" width="10" height="10" label="MS" />
+			<button id="btn4" width="10" height="10" label="M+" />
+			<button id="btn5" width="10" height="10" label="M-" />
+			</row>
+			<row>
+			<button id="btn6" width="10" height="10" label="←" />
+			<button id="btntnn" width="10" height="10" label="CE" />
+			<button id="btntn" width="10" height="10" label="C" />
+			<button id="btn8" width="10" height="10" label="±" />
+			<button id="btn7" width="10" height="10" label="√" />
+			</row>
+			<row>
+			<button id="btn15" width="10" height="10" label="7" />
+			<button id="btn16" width="10" height="10" label="8" />
+			<button id="btn17" width="10" height="10" label="9" />
+			<button id="btn21" width="10" height="10" label="/" />
+			<button id="btn23" width="10" height="10" label="%" />
+			</row>
+			<row>
+			<button id="btn12" width="10" height="10" label="4" />
+			<button id="btn13" width="10" height="10" label="5" />
+			<button id="btn14" width="10" height="10" label="6" />
+			<button id="btn22" width="10" height="10" label="*" />
+			<button id="btn28" width="10" height="10" label="1/x" />
+			</row>
+			<row>
+			<button id="btn9" width="10" height="10" label="1" />
+			<button id="btn0" width="10" height="10" label="2" />
+			<button id="btn11" width="10" height="10" label="3" />
+			<button id="btn20" width="10" height="10" label="-" />
+			</row>
+			<row>
+			<button id="btn18" width="100" height="10" label="0" />
+			<button id="btn30" width="10" height="10" label="." />
+			<button id="btn19" width="10" height="10" label="+" />
+			<button id="btn24" width="10" height="10" label="=" />
+			</row>
+			</rows>		
+			</grid>
+
+			
+
+		</window>
+	</div>
+</zk>
