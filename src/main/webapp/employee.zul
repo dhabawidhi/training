@@ -1,6 +1,24 @@
-<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?page title="Product" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window title="new page title" border="normal">
-New Content Here!
-</window>
+	<window title="new page title" border="normal" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('vmd.EmployeeVmd')">
+	
+	
+	  		<listbox model="@load(vm.employeeDtos)" selectedItem="@bind(vm.employeeDto)" emptyMessage="kosong">
+			<listhead>
+				<listheader label="Employee Id"></listheader>
+				<listheader label="Name"></listheader>
+				<listheader label="DOB"></listheader>
+				<listheader label="Height"></listheader>
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.empId)"/>
+					<listcell label="@load(each.empName)"/>
+					<listcell label="@load(each.empDOB)"/>
+					<listcell label="@load(each.empHeight)"/>
+				</listitem>
+			</template>
+		</listbox>
+	</window>
 </zk>

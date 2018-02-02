@@ -1,190 +1,24 @@
-<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?page title="Product" contentType="text/html;charset=UTF-8"?>
 <zk>
-
-	<window id="win1" title="new page title" border="normal" width="300px" minimizable="true">
-	New Content Here!
-	</window>
-	<separator></separator>
-	<separator></separator>
-	<window id="win2" title="new page title" border="normal" width="300px" maximizable="true">
-		<label style="font-weight:bold; font-size:30px; color:red" value="Test"/>
-	</window>
-	
-	<vlayout>
-		<button label="button1"></button>
-		<button label="button2"></button>
-	</vlayout>
-	<hlayout>
-		<button label="button3"></button>
-		<button label="button4"></button>
-	</hlayout>
-	
-
-	<grid>
-		<columns sizable="true">
-			<column label="Type" width="50px"></column>
-			<column label="Content"></column>
-		</columns>
-		<rows>
-			<row>
-				<label value="File"/>
-				<textbox width="99%"/>
-			</row>
-			<row>
-				<label value="Type"/>
-				<hbox>
-					<listbox mold="select">
-						<listitem label="Java Files,(*.java)"/>
-						<listitem label="All Files,(*.*)"/>
-					
-					</listbox>
-					<vbox>
-						<button label="Browse..."/>
-					</vbox>
-										
-					
-				</hbox>
-			</row>
-			<row>
-				<label value="Options"/>
-				<textbox rows="3" width="99%"/>
-			</row>
-		</rows>
-	</grid>
-	
-	<button label="left" image="/imgs/cross.png" width="125px"/>
-	<button label="right" image="/imgs/demo.png" dir="reverse" width="125px"/>
-	<button label="above" image="/imgs/doc.png" orient="vertical" width="125px"/>
-	<button label="bottom" image="/imgs/fn.png" orient="vertical" dir="reverse" width="125px"/>
-	
-	<textbox value="text"/>
-	<textbox value="secret" type="password"/>
-	<textbox constraint="no empty: Tolong masukkan perlahan"/>
-	<textbox rows="5" width="99%">
-	</textbox>
-	<separator></separator>
-	<separator></separator>
-	<doublebox format="#,##0.##" constraint="no empty"></doublebox>
-	<separator/>
-	<separator/>
-	<datebox constraint="between 20071225 and 20071203"/>
-	<separator/>
-	<separator/>
-	
-	<datebox constraint="before 20071225"/>
-	
-	<separator/>
-	<separator/>
-	<datebox constraint="after 20071225"/>
-	
-	<separator/>
-	<separator/>
-	<datebox lenient="true" buttonVisible="false"/>
-	
-	<separator/>
-	<separator/>
-	<datebox lenient="false" buttonVisible="true"/>
-	<separator/>
-	<separator/>
-	<datebox format="dd/MMM/yyyy" constraint="no future" onCreate="self.value=new Date()"/>
-	<separator/>
-	<separator/>
-	<datebox format="dd/MM/yyyy" lenient="true" constraint="no future, after 20171011" onCreate="self.value=new Date()"/>
-	<separator/>
-	<separator/>
-	<vlayout>
-		<checkbox value="A" id="apple2" label="Apple" onCheck="opt.value=self.value"/>
-		<checkbox value="B" id="orange2" label="Orange" onCheck="opt.value=self.value"/>
-		<checkbox value="C" id="banana2" label="Banana" onCheck="opt.value=self.value"/>
-	</vlayout>
-	<textbox id="opt" value=""/>
-	<window title="Checkbox demo" border="normal" width="350px">
-	<checkbox value="A" id="apple" label="Apple" onCheck="doChecked()"/>
-	<checkbox value="B" id="orange" label="Orange" onCheck="doChecked()"/>
-	<checkbox value="C" id="banana" label="Banana" onCheck="doChecked()"/>
-	<hbox>
-		You have selected:
-		<label id="fruit"/>
-	</hbox>
-	
-	<zscript>
-		void doChecked(){
-			fruit.value=(apple.isChecked() ? apple.label+' ':&quot;&quot;)
-			+(orange.isChecked()? orange.label+' ':&quot;&quot;)
-			+(banana.isChecked()? banana.label+' ':&quot;&quot;);
-		}
+	<window title="new page title" border="normal" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('vmd.CustomerVmd')">
 	
 	
-	</zscript>
-	
-	
-	</window>
-	<separator/>
-	<separator/>
-	<radiogroup onCheck="opt2.value=self.selectedItem.label">
-		<vlayout>
-			<radio value="A" id="apple3" label="Apple"/>
-			<radio value="B" id="orange3" label="Orange"/>
-			<radio value="C" id="banana3" label="Banana"/>
-		</vlayout>
-	
-	</radiogroup>
-	<textbox id="opt2" value=""/>
-	<separator/>
-	<separator/>
-	<combobox readonly="true" constraint="no empty:isi dulu dong">
-		<comboitem value="A" id="apple4" label="Apple" image="/imgs/cross.png" description="ini buat apple"/>
-		<comboitem value="B" id="orange4" label="Orange" image="/imgs/demo.png" description="ini buat jeruk"/>
-		<comboitem value="C" id="banana4" label="Banana" image="/imgs/fn.png" description="ini buat jeruk"/>
-	</combobox>
-	<separator/>
-	<separator/>
-	<window title="listbox demo" border="normal"> 
-		<listbox id="box" mold="paging" pagingPosition="bottom" pageSize="2" onSelect="opt4.value=self.selectedItem.label"> 
-			
-			<listhead sizable="true"> 
-				<listheader label="name" sort="auto" /> 
-				<listheader label="gender" sort="auto" /> 
-			</listhead> 
-			<listitem> 
-				<listcell label="Mary" /> 
-				<listcell label="FEMALE" />
-			 </listitem>
-			  <listitem> 
-			  	<listcell label="John"></listcell> 
-			  	<listcell label="MALE" />
-			  </listitem> 
-			  <listitem>
-			  	 <listcell label="Jane" /> 
-			  	 <listcell label="FEMALE" /> 
-			  </listitem> 
-			  <listitem> 
-			  	<listcell label="Henry" /> 
-			  	<listcell label="MALE" /> 
-		  	</listitem> 
-		  	<listfoot> 
-		  		<listfooter> 
-		  			<label value="This is footerl" />
-	  			 </listfooter> 
-	  			 <listfooter> 
-	  			 	<label value="This is footer2" />
-				</listfooter> 
-			</listfoot> 
-		</listbox> 
-		<textbox id="opt4" value=""/>
-	</window> 
-	
-	<separator></separator>
-	<separator></separator>
-	<listbox id="box2" mold="paging" pagingPosition="bottom" pageSize="2" onSelect="opt5.value=self.selectedItem.label" emptyMessage="loading">
+	  		<listbox model="@load(vm.customerDtos)" selectedItem="@bind(vm.customerDto)" emptyMessage="kosong">
+			<listhead>
+				<listheader label="Customer Id"></listheader>
+				<listheader label="Name"></listheader>
+				<listheader label="Address"></listheader>
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.custId)"/>
+					<listcell label="@load(each.custName)"/>
+					<listcell label="@load(each.custAddress)"/>
+				</listitem>
+			</template>
+		</listbox>
+	 
 		
-		<!-- 
-		<listitem value="A" label="Apple"/>
-		<listitem value="B" label="Orange"/>
-		<listitem value="C" label="Banana"/>
-	 	  
-		-->
-	</listbox>
-	<textbox id="opt5" value=""/>
-	
+	</window>
 </zk>
