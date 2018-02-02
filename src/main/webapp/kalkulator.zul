@@ -1,14 +1,17 @@
 <?page title="kalkulator" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window apply="clas.Kalkulator" title="Kalkulator" border="normal" mode="overlapped" maximizable="true">
+<window title="Kalkulator" border="normal" mode="overlapped" maximizable="true"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('vmd.Kalkulator2')"
+	
+>
 	<hbox>
 		<a label="View  " href="#" />
 		<a label="Edit  " href="#" />
 		<a label="Help" href="#" />
 	</hbox>	
 	<vbox>
-	  <textbox id="textInput" focus="true"  width="190px" rows="2" placeholder="0">
-	  	
+	  <textbox id="textInput" focus="true"  width="190px" rows="2" placeholder="@load(vm.numberPlaceholder)" value="@load(vm.numbers)">
 	  </textbox>
 	  <separator></separator>
 	  <hbox>
@@ -25,47 +28,48 @@
 	    </hbox>
 	        
 	    <hbox>      
-	     <button width="35px" id="btnBackSpace" label="←"></button>
+	     <button width="35px" id="btnBackSpace" label="←" onClick="@command('backSpace')"></button>
 	     <button width="35px" id="btnCE" label="CE"></button>
-	     <button width="35px" id="btnC" label="C"></button>
+	     <button width="35px" id="btnC" label="C" onClick="@command('clear')"></button>
 	     <button width="35px" id="btnPlusMinus" label="±"></button>
 	
 	    </hbox>    
 	    <hbox>      
-	     <button width="35px" id="btn7" label="7"></button>
-	     <button width="35px" id="btn8" label="8"></button>
-	     <button width="35px" id="btn9" label="9"></button>
-	     <button width="35px" id="btnBagi" label="/"></button>
+	    	
+	     <button width="35px" id="btn7" label="7" onClick="@command('inputNumber', input='7')"></button>
+	     <button width="35px" id="btn8" label="8" onClick="@command('inputNumber', input='8')"></button>
+	     <button width="35px" id="btn9" label="9" onClick="@command('inputNumber', input='9')"></button>
+	     <button width="35px" id="btnBagi" label="/" onClick="@command('inputParam', param2='/')"></button>
 	     
 	    </hbox>    
 	    <hbox>      
-	     <button width="35px" id="btn4" label="4"></button>
-	     <button width="35px" id="btn5" label="5"></button>
-	     <button width="35px" id="btn6" label="6"></button>
-	     <button width="35px" id="btnKali" label="*"></button>
+	     <button width="35px" id="btn4" label="4" onClick="@command('inputNumber', input='4')"></button>
+	     <button width="35px" id="btn5" label="5" onClick="@command('inputNumber', input='5')"></button>
+	     <button width="35px" id="btn6" label="6" onClick="@command('inputNumber', input='6')"></button>
+	     <button width="35px" id="btnKali" label="*" onClick="@command('inputParam', param2='*')"></button>
 	     
 	    </hbox>
 	    <hbox>      
-	     <button width="35px" id="btn1" label="1"></button>
-	     <button width="35px" id="btn2" label="2"></button>
-	     <button width="35px" id="btn3" label="3"></button>
-	     <button width="35px" id="btnMinus" label="-"></button>
+	     <button width="35px" id="btn1" label="1" onClick="@command('inputNumber', input='1')"></button>
+	     <button width="35px" id="btn2" label="2" onClick="@command('inputNumber', input='2')"></button>
+	     <button width="35px" id="btn3" label="3" onClick="@command('inputNumber', input='3')"></button>
+	     <button width="35px" id="btnMinus" label="-" onClick="@command('inputParam', param2='-')"></button>
 	     
 	     
 	    </hbox>    
 	    <hbox>      
 	     <button width="75px" id="btn0" label="0"></button>
 	     <button width="35px" label="."></button>
-	     <button width="35px" id="btnPlus" label="+"></button>
+	     <button width="35px" id="btnPlus" label="+" onClick="@command('inputParam', param2='+')"></button>
 	     
 	    </hbox>
 	   </vbox>
 	   <vbox>
 		   <button width="35px" id="sin" label="M-">  </button>
-	        <button width="35px" id="cos" label="√"></button>
+	        <button width="35px" id="cos" label="√" onClick="@command('root')"></button>
 	     	<button width="35px" id="tan" label="%"></button>
 	     	<button width="35px" id="xy" label="1/x"></button>
-	     	<button width="35px" height="53px" id="submit" label="="></button>
+	     	<button width="35px" height="53px" id="submit" label="=" onClick="@command('result')"></button>
 	     </vbox>
 	  </hbox>
 	 </vbox>

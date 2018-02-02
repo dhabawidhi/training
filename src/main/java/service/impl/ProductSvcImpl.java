@@ -39,6 +39,24 @@ public class ProductSvcImpl implements ProductSvc {
 	}
 
 	@Override
+	public List<ProductDto> findAll(String search) {
+		List<ProductDto> productDtos= new ArrayList<ProductDto>();
+		List<Product> products=productDao.findAll("%"+search+"%");
+		for(Product product:products)
+		{
+			ProductDto productDto=new ProductDto();
+			productDto.setExpDate(product.getExpDate());
+			productDto.setProdId(product.getProdId());
+			productDto.setProdName(product.getProdName());
+			productDto.setProdPrice(product.getProdPrice());
+			productDtos.add(productDto);
+			
+		}
+		return productDtos;
+		
+	}
+	
+	@Override
 	public void save(ProductDto productDto) {
 		// TODO Auto-generated method stub
 		Product product=new Product();

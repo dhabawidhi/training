@@ -1,0 +1,31 @@
+<?page title="cobae" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css"
+    href="static/css/bootstrap.min.css" ?>
+<?link rel="stylesheet" type="text/css"
+    href="static/css/style.css" ?>
+<zk>
+	<window title="new page title" border="normal" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('vmd.CustomerVmd')">
+  		<listbox model="@load(vm.customerDtos)" selectedItem="@bind(vm.customerDto)" emptyMessage="kosong">
+			<listhead>
+				<listheader label="Customer Id"></listheader>
+				<listheader label="Name"></listheader>
+				<listheader label="Address"></listheader>
+				<listheader label="Action"></listheader>
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.custId)"/>
+					<listcell label="@load(each.custName)"/>
+					<listcell label="@load(each.custAddress)"/>
+					<listcell span="glyphicon glyphicon-pencil"/>
+				</listitem>
+			</template>
+		</listbox>
+	</window>
+	<div class="btn-group">
+	  <button type="button" class="btn btn-danger">Left</button>
+	  <button type="button" class="btn btn-default">Middle</button>
+	  <button type="button" class="btn btn-default">Right</button>
+	</div>
+</zk>

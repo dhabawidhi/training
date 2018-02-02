@@ -2,7 +2,13 @@ package vmd;
 
 import java.util.List;
 
+import javassist.runtime.Inner;
+
+import org.zkoss.bind.BindUtils;
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
@@ -16,6 +22,16 @@ public class ProductVmd {
 	
 	private List<ProductDto> productDtos;
 	private ProductDto productDto;
+	private String search;
+	
+	
+	
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
 	public ProductSvc getProductSvc() {
 		return productSvc;
 	}
@@ -39,6 +55,25 @@ public class ProductVmd {
 	public void load()
 	{
 		productDtos=productSvc.findAll();
+		
+	}
+	
+//	@NotifyChange("productDtos")
+	@Command
+	public void search()
+	{
+//		Messagebox.show(search);
+		List<ProductDto> productDtoSearch=productSvc.findAll(search);
+		if (productDtoSearch.size()>0) {
+			productDtos=productDtoSearch;
+			BindUtils.postNotifyChange(null, null, this, "productDtos");// sama seperti notify change secara program
+		} else {
+			Messagebox.show("Not found");
+//			productDtos=productSvc.findAll();
+//			BindUtils.postNotifyChange(null, null, this, "productDtos");
+		}
+		
+		
 		
 	}
 }

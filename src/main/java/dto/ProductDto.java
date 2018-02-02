@@ -2,7 +2,7 @@ package dto;
 
 import java.util.Date;
 
-public class ProductDto {
+public class ProductDto implements Comparable<ProductDto>{
 	private String prodId;
 	private String prodName;
 	private int prodPrice;
@@ -30,6 +30,11 @@ public class ProductDto {
 	}
 	public void setExpDate(Date expDate) {
 		this.expDate = expDate;
+	}
+	@Override
+	public int compareTo(ProductDto arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

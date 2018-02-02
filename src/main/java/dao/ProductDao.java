@@ -14,4 +14,7 @@ public interface ProductDao extends JpaRepository<Product, ProductPK> {
 	
 	@Query(value="select prod_price from m_product",nativeQuery=true)
 	public List<Object[]> getNameNative();
+	
+	@Query(value="select * from m_product where prod_name like ? ", nativeQuery=true)
+	public List<Product> findAll(String search);
 }

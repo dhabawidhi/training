@@ -2,9 +2,9 @@
 <zk>
 	<window title="new page title" border="normal" apply="org.zkoss.bind.BindComposer"
 	viewModel="@id('vm') @init('vmd.CustomerVmd')">
-	
-	
-	  		<listbox model="@load(vm.customerDtos)" selectedItem="@bind(vm.customerDto)" emptyMessage="kosong">
+  		<listbox model="@load(vm.customerDtos)" selectedItem="@bind(vm.customerDto)" emptyMessage="kosong"
+  			id="box" mold="paging" pagingPosition="bottom" pageSize="5"
+  		>
 			<listhead>
 				<listheader label="Customer Id"></listheader>
 				<listheader label="Name"></listheader>
@@ -18,7 +18,5 @@
 				</listitem>
 			</template>
 		</listbox>
-	 
-		
 	</window>
 </zk>
