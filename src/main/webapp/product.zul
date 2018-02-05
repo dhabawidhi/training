@@ -11,6 +11,11 @@
 	Search:
 	<textbox value="@save(vm.search)"></textbox>
 	<button label="Search" onClick="@command('search')"></button>
+	<separator/>
+	<separator/>
+	<button label="Add" onClick="@command('add')"></button>
+	<button label="Delete" onClick="@command('delete')"></button>
+	<button label="Edit" onClick="@command('edit')"></button>
 	
 	  		<listbox model="@load(vm.productDtos)" selectedItem="@bind(vm.productDto)" emptyMessage="kosong"
 	  		id="box" mold="paging" pagingPosition="bottom" pageSize="5"
@@ -26,7 +31,7 @@
 				<listitem>
 					<listcell label="@load(each.prodId)"/>
 					<listcell label="@load(each.prodName)"/>
-					<listcell label="@load(each.prodPrice)"/>
+					<listcell label="@load(each.prodPrice) @converter('formatedNumber', format='$#,##0.00')" style="text-align: right;"/>
 					<listcell label="@load(each.expDate)  @converter('formatedDate',format='d MMMM yyyy')"/>
 					<!-- 
 						<listcell>
@@ -37,8 +42,25 @@
 					 -->
 				</listitem>
 			</template>
+			
 		</listbox>
-	 
+	 	<combobox model="@load(vm.productDtos)" selectedItem="@bind(vm.productDto)">
+			<template name="model">
+				<comboitem label="@load(each.prodName)" value="@load(each.prodId)"></comboitem>	
+			</template>
+		</combobox>
 		
+		<radiogroup model="@load(vm.productDtos)" selectedItem="@bind(vm.productDto)">
+			<template name="model">
+				<radio label="@load(each.prodName)"  value="@load(each.prodId)"></radio>
+			</template>
+		</radiogroup>
+		<separator/>
+		<separator/>
+		<vlayout children="@load(vm.productDtos)">
+			<template name="children">
+				<checkbox label="@load(each.prodName)" onCheck="@command('pick', checked=self.checked,picked=each)"/>
+			</template>
+		</vlayout>
 	</window>
 </zk>

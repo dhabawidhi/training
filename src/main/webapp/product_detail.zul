@@ -1,0 +1,33 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="new page title" border="normal" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('vmd.ProductDetailVmd')">
+	<hlayout>
+		<button label="Back" onClick="@command('back')"></button>
+		<button label="Save" onClick="@command('save')"></button>
+	</hlayout>
+	<grid>
+		<rows>
+			<row>
+				<label value='Product Id'/>
+				<textbox constraint="no empty : harus diisi" value="@load(vm.productDto.prodId)
+				 @save(vm.productDto.prodId, before='save')"
+				 readonly="@load(vm.productDto.prodId eq null ? false:true)"></textbox>
+			</row>
+			<row>
+				<label value='Product Name'/>
+				<textbox constraint="no empty : harus diisi" value="@bind(vm.productDto.prodName) @save(vm.productDto.prodName)"></textbox>
+			</row>
+			<row>
+				<label value='Exp Date'/>
+				<datebox format="dd/MM/yyyy" constraint="no empty, no future, no today"
+				value="@bind(vm.productDto.expDate) @save(vm.productDto.expDate)"></datebox>
+			</row>
+			<row>
+				<label value='Price'/>
+				<intbox constraint="no empty, no negative" value="@bind(vm.productDto.prodPrice) @save(vm.productDto.prodPrice)"></intbox>
+			</row>
+		</rows>
+	</grid>
+</window>
+</zk>

@@ -1,0 +1,33 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="new page title" border="normal" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('vmd.EmployeeDetailVmd')">
+	<hlayout>
+		<button label="Back" onClick="@command('back')"></button>
+		<button label="Save" onClick="@command('save')"></button>
+	</hlayout>
+	<grid>
+		<rows>
+			<row>
+				<label value='Employee Id'/>
+				<textbox constraint="no empty : harus diisi" value="@load(vm.employeeDto.empId)
+				 @save(vm.employeeDto.empId, before='save')"
+				 readonly="@load(vm.employeeDto.empId eq null ? false:true)"></textbox>
+			</row>
+			<row>
+				<label value='Employee Name'/>
+				<textbox constraint="no empty : harus diisi" value="@bind(vm.employeeDto.empName) @save(vm.employeeDto.empName)"></textbox>
+			</row>
+			<row>
+				<label value='Date of Birth'/>
+				<datebox format="dd/MM/yyyy" constraint="no empty, no future, no today"
+				value="@bind(vm.employeeDto.empDOB) @save(vm.employeeDto.empDOB)"></datebox>
+			</row>
+			<row>
+				<label value='Height'/>
+				<intbox constraint="no empty, no negative" value="@bind(vm.employeeDto.empHeight) @save(vm.employeeDto.empHeight)"></intbox>
+			</row>
+		</rows>
+	</grid>
+</window>
+</zk>

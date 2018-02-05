@@ -2,9 +2,18 @@
 <zk>
 	<window title="new page title" border="normal" apply="org.zkoss.bind.BindComposer"
 	viewModel="@id('vm') @init('vmd.EmployeeVmd')">
+		Search:
+		<textbox value="@save(vm.search)"></textbox>
+		<button label="Search" onClick="@command('search')"></button>
+		<separator/>
+		<separator/>
+		<button label="Add" onClick="@command('add')"></button>
+		<button label="Delete" onClick="@command('delete')"></button>
+		<button label="Edit" onClick="@command('edit')"></button>
 	
-	
-	  		<listbox model="@load(vm.employeeDtos)" selectedItem="@bind(vm.employeeDto)" emptyMessage="kosong">
+  		<listbox model="@load(vm.employeeDtos)" selectedItem="@bind(vm.employeeDto)" emptyMessage="kosong"
+  		id="box" mold="paging" pagingPosition="bottom" pageSize="5"
+	  		>
 			<listhead>
 				<listheader label="Employee Id"></listheader>
 				<listheader label="Name"></listheader>

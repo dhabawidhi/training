@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +25,8 @@ public class EmployeeSvcImpl implements EmployeeSvc {
 	public List<EmployeeDto> findAll() {
 		// TODO Auto-generated method stub
 		List<EmployeeDto> employeeDtos= new ArrayList<EmployeeDto>();
-		List<Employee> employees=employeeDao.findAll();
+		Sort sort =new Sort(Sort.Direction.ASC,"empId");
+		List<Employee> employees=employeeDao.findAll(sort);
 		for(Employee employee:employees)
 		{
 			EmployeeDto employeeDto=new EmployeeDto();

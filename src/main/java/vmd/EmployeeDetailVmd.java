@@ -1,7 +1,5 @@
 package vmd;
 
-import java.util.List;
-
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.Executions;
@@ -11,33 +9,21 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Messagebox;
 
 import dto.EmployeeDto;
-import dto.ProductDto;
 import service.EmployeeSvc;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
-public class EmployeeVmd {
+public class EmployeeDetailVmd {
 	@WireVariable
 	private EmployeeSvc employeeSvc;
 	
-	private List<EmployeeDto> employeeDtos;
 	private EmployeeDto employeeDto;
-	
-	
-	
+
 	public EmployeeSvc getEmployeeSvc() {
 		return employeeSvc;
 	}
 
 	public void setEmployeeSvc(EmployeeSvc employeeSvc) {
 		this.employeeSvc = employeeSvc;
-	}
-
-	public List<EmployeeDto> getEmployeeDtos() {
-		return employeeDtos;
-	}
-
-	public void setEmployeeDtos(List<EmployeeDto> employeeDtos) {
-		this.employeeDtos = employeeDtos;
 	}
 
 	public EmployeeDto getEmployeeDto() {
@@ -47,35 +33,26 @@ public class EmployeeVmd {
 	public void setEmployeeDto(EmployeeDto employeeDto) {
 		this.employeeDto = employeeDto;
 	}
-
+	
 	@Init
 	public void load()
 	{
-		employeeDtos=employeeSvc.findAll();
-		
-	}
-	
-	@Command
-	public void add()
-	{
-		employeeDto= new EmployeeDto();
-		Sessions.getCurrent().setAttribute("dto", employeeDto);
-		Executions.sendRedirect("employee_detail.zul");
+		employeeDto=(EmployeeDto) Sessions.getCurrent().getAttribute("dto");
 		
 	}
 	
 	@Command()
-	public void edit()
+	public void back()
 	{
-		if(employeeDto==null)
-		{
-			Messagebox.show("Silahkan pilih data");
-			
-		}
-		else {
-			Sessions.getCurrent().setAttribute("dto", employeeDto);
-			Executions.sendRedirect("employee_detail.zul");
-		}
+		Executions.sendRedirect("employee.zul");
 		
+	}
+	
+	@Command()
+	public void save()
+	{
+		employeeSvc.save(employeeDto);
+		Messagebox.show("Data berhasil disimpan");
+		Executions.sendRedirect("employee.zul");
 	}
 }

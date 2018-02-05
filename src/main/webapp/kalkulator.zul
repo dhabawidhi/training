@@ -59,7 +59,7 @@
 	     
 	    </hlayout>    
 	    <hlayout>      
-	     <button width="75px" id="btn0" label="0"></button>
+	     <button width="75px" id="btn0" label="0" onClick="@command('inputNumber', input='0')"></button>
 	     <button width="35px" label="." onClick="@command('inputPoint')"></button>
 	     <button width="35px" id="btnPlus" label="+" onClick="@command('inputParam', param2='+')"></button>
 	     

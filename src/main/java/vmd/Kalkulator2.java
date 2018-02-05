@@ -15,10 +15,7 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
-import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
-
-import dto.ProductDto;
 
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
@@ -304,14 +301,40 @@ public class Kalkulator2 {
 		
 	}
 	
-	
-	
-	
-	
 	@NotifyChange({"numberPlaceHolder","numbers"})
 	@Command()
 	public void result()
 	{
+		/*
+		number2=Double.parseDouble(numbers);
+		if(param.equals("+"))
+		{
+			numberPlaceHolder=number1+number2+"";
+//			number1=Double.parseDouble(numberPlaceHolder);
+//			numbers="";
+			numbers="";
+		}
+		else if(param.equals("-"))
+		{
+			numberPlaceHolder=number1-number2+"";
+			numbers="";
+		}
+		else if(param.equals("*"))
+		{
+			numberPlaceHolder=number1*number2+"";	
+			numbers="";
+		}
+		else if(param.equals("/"))
+		{
+			numberPlaceHolder=number1/number2+"";
+			numbers="";
+		}
+		else if(param.equals("%"))
+		{
+			numberPlaceHolder=number1%number2+"";
+			numbers="";
+		}
+		*/
 		
 		number2=Double.parseDouble(numbers);
 		if(param.equals("+"))

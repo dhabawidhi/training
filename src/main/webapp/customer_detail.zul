@@ -1,0 +1,28 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="new page title" border="normal" apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('vmd.CustomerDetailVmd')">
+	<hlayout>
+		<button label="Back" onClick="@command('back')"></button>
+		<button label="Save" onClick="@command('save')"></button>
+	</hlayout>
+	<grid>
+		<rows>
+			<row>
+				<label value='Employee Id'/>
+				<textbox constraint="no empty : harus diisi" value="@load(vm.customerDto.custId)
+				 @save(vm.customerDto.custId, before='save')"
+				 readonly="@load(vm.customerDto.custId eq null ? false:true)"></textbox>
+			</row>
+			<row>
+				<label value='Employee Name'/>
+				<textbox constraint="no empty : harus diisi" value="@bind(vm.customerDto.custName) @save(vm.customerDto.custName)"></textbox>
+			</row>
+			<row>
+				<label value='Address'/>
+				<textbox constraint="no empty : harus diisi" value="@bind(vm.customerDto.custAddress) @save(vm.customerDto.custAddress)"></textbox>
+			</row>
+		</rows>
+	</grid>
+</window>
+</zk>

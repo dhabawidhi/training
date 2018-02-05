@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +24,8 @@ public class ProductSvcImpl implements ProductSvc {
 	@Override
 	public List<ProductDto> findAll() {
 		List<ProductDto> productDtos= new ArrayList<ProductDto>();
-		List<Product> products=productDao.findAll();
+		Sort sort =new Sort(Sort.Direction.ASC,"prodId");
+		List<Product> products=productDao.findAll(sort);
 		for(Product product:products)
 		{
 			ProductDto productDto=new ProductDto();
@@ -60,10 +62,10 @@ public class ProductSvcImpl implements ProductSvc {
 	public void save(ProductDto productDto) {
 		// TODO Auto-generated method stub
 		Product product=new Product();
-		product.setExpDate(product.getExpDate());
-		product.setProdId(product.getProdId());
-		product.setProdName(product.getProdName());
-		product.setProdPrice(product.getProdPrice());
+		product.setExpDate(productDto.getExpDate());
+		product.setProdId(productDto.getProdId());
+		product.setProdName(productDto.getProdName());
+		product.setProdPrice(productDto.getProdPrice());
 		productDao.save(product);
 	
 	}
