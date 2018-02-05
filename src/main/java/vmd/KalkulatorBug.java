@@ -1,13 +1,5 @@
 package vmd;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.List;
 
 import org.zkoss.bind.BindUtils;
@@ -22,7 +14,7 @@ import dto.ProductDto;
 
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
-public class Kalkulator2 {
+public class KalkulatorBug {
 	
 	private Double number;
 	private Double number1;
@@ -115,12 +107,13 @@ public class Kalkulator2 {
 	@Command()
 	public void inputParam(@BindingParam("param2") String param2)
 	{
-		
+		/*
 		param=param2;
 		number1=Double.parseDouble(numbers);
 		numberPlaceHolder=numbers;
 		numbers="";
-		/*
+		*/
+		
 		number1=Double.parseDouble(numbers);
 		param=param2;
 		if(counter==0)
@@ -163,7 +156,7 @@ public class Kalkulator2 {
 		}
 		
 		counter++;
-		*/
+		
 	}
 	
 	@NotifyChange("numbers")
@@ -202,7 +195,7 @@ public class Kalkulator2 {
 			// TODO: handle exception
 			willPerX=Double.parseDouble(numbers);
 		}
-		numbers=1.0/willPerX+"";
+		numbers=1/willPerX+"";
 	}
 	
 	@NotifyChange("numbers")
@@ -220,65 +213,6 @@ public class Kalkulator2 {
 		willSqrt=(int) Math.sqrt(willSqrt);
 		numbers=willSqrt+"";
 		
-	}
-	
-	@NotifyChange("numbers")
-	@Command()
-	public void memoryStore()
-	{
-		Writer writer = null;
-
-		try {
-		    writer = new BufferedWriter(new OutputStreamWriter(
-		          new FileOutputStream("memoryCalc.txt"), "utf-8"));
-		    writer.write(numbers);
-		} catch (IOException ex) {
-		  // report
-		} finally {
-		   try {writer.close();} catch (Exception ex) {/*ignore*/}
-		}
-	}
-	
-	@NotifyChange({"numbers","numberPlaceHolder"})
-	@Command()
-	public void memoryRecall() throws IOException
-	{
-		
-		BufferedReader br = new BufferedReader(new FileReader("memoryCalc.txt"));
-		try {
-		    StringBuilder sb = new StringBuilder();
-		    String line = br.readLine();
-
-		    while (line != null) {
-		        sb.append(line);
-		        sb.append(System.lineSeparator());
-		        line = br.readLine();
-		    }
-		    numbers = sb.toString();
-		} finally {
-		    br.close();
-		}
-		if(numbers.equals(""))
-		{
-			numberPlaceHolder="0";
-		}
-	}
-	
-	@NotifyChange("numbers")
-	@Command()
-	public void memoryClear()
-	{
-		Writer writer = null;
-
-		try {
-		    writer = new BufferedWriter(new OutputStreamWriter(
-		          new FileOutputStream("memoryCalc.txt"), "utf-8"));
-		    writer.write("");
-		} catch (IOException ex) {
-		  // report
-		} finally {
-		   try {writer.close();} catch (Exception ex) {/*ignore*/}
-		}
 	}
 	
 	@NotifyChange("numbers")
@@ -305,14 +239,11 @@ public class Kalkulator2 {
 	}
 	
 	
-	
-	
-	
 	@NotifyChange({"numberPlaceHolder","numbers"})
 	@Command()
 	public void result()
 	{
-		
+		/*
 		number2=Double.parseDouble(numbers);
 		if(param.equals("+"))
 		{
@@ -337,7 +268,7 @@ public class Kalkulator2 {
 		{
 			numbers=number1%number2+"";	
 		}
-		
+		*/
 		/*
 		if(param.equals("+"))
 		{
