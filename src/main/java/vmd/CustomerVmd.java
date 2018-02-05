@@ -2,13 +2,17 @@ package vmd;
 
 import java.util.List;
 
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Messagebox.Button;
+import org.zkoss.zul.Messagebox.ClickEvent;
 
 import dto.CustomerDto;
 import dto.EmployeeDto;
@@ -69,6 +73,41 @@ public class CustomerVmd {
 		else {
 			Sessions.getCurrent().setAttribute("dto", customerDto);
 			Executions.sendRedirect("customer_detail.zul");
+		}
+		
+	}
+	
+	@Command
+	public void delete()
+	{
+		if(customerDto!=null)
+		{
+			Messagebox.show("Apakah yakin mau di hapus?"," Perhatian",
+			new Button[]{Button.YES,Button.NO}, 
+			Messagebox.QUESTION,
+			Button.NO,
+			new EventListener<Messagebox.ClickEvent>()
+			{
+				public void onEvent(ClickEvent event)
+				{
+					if(Messagebox.ON_YES.equals(event.getName()))
+					{
+						customerSvc.delete(customerDto);
+						customerDtos.remove(customerDto);
+						customerDto=null;
+						BindUtils.postNotifyChange(null, null, CustomerVmd.this, "customerDtos");
+						Messagebox.show("Data berhasil di hapus");
+						
+					}
+					
+					
+				}
+				
+			});
+			
+		}
+		else {
+			Messagebox.show("Silahkan pilih data");
 		}
 		
 	}
