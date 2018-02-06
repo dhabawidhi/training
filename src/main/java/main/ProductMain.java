@@ -19,7 +19,8 @@ public class ProductMain {
 		System.out.println("Text");
 		
 		ProductDao productDao = ctx.getBean(ProductDao.class);
-	 	List<Product> products= productDao.findAll();
+	 	List<Product> products= productDao.findAll("%coki%");
+	 	
 	 	
 	 	for(Product x:products)
 	 		
@@ -28,7 +29,7 @@ public class ProductMain {
 	 		System.out.println("name\t:"+x.getProdName());
 	 		
 	 	}
-	 	
+	 	/*
 	 	List<Object[]> pNameList=productDao.getName();
 	 	for(Object x:pNameList)
 	 	{
@@ -42,7 +43,7 @@ public class ProductMain {
 	 		System.out.println(x);
 	 		
 	 	}
-	 	
+	 	*/
 	 	/*
 	 	Product p1=new Product();
 	 	p1.setProdId("3");

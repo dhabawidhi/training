@@ -53,6 +53,11 @@ public class CustomerVmd {
 		
 	}
 	
+	public List<CustomerDto> getAllCustomerDto() {
+		return customerSvc.findAll();
+	}
+	
+	
 	@Command
 	public void add()
 	{

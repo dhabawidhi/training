@@ -1,0 +1,60 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="new page title" border="normal" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('vmd.OrderDetailVmd')">
+		<hlayout>
+			<button label="Back" onClick="@command('back')"></button>
+			<button label="Save" onClick="@command('save')"></button>
+		</hlayout>
+		<grid>
+			<rows>
+				<row>
+					<label value='Order Id'/>
+					<textbox constraint="no empty : harus diisi" value="@load(vm.orderDto.orderId)
+					 @save(vm.orderDto.orderId, before='save')"
+					 readonly="@load(vm.orderDto.orderId eq null ? false:true)"></textbox>
+				</row>
+				
+				<row>
+					<label value='Cust Id'/>
+					<textbox constraint="no empty : harus diisi" value="@bind(vm.orderDto.custId)"></textbox>
+					<combobox model="@load(vm.customerDtos)" selectedItem="@bind(vm.orderDto.custId)">
+						<template name="model">
+							<comboitem label="@load(each.custName)" value="@load(each.custId)"></comboitem>	
+						</template>
+					</combobox>
+				</row>
+				<row>
+					<label value='Total'/>
+					<intbox constraint="no empty : harus diisi" value="@bind(vm.orderDto.total)"></intbox>
+				</row>
+			</rows>
+		</grid>
+		<separator></separator>
+		<separator></separator>
+		<separator></separator>
+		<button label="Add Product" onClick="@command('add')"></button>
+		<button label="Delete Product" onClick="@command('delete')"></button>
+		<listbox model="@load(vm.orderDto.orderDetailDtos)">
+			<listhead>
+				<listheader label="Order Id"></listheader>
+				<listheader label="Product Name"></listheader>
+				<listheader label="Product Price"></listheader>
+				<listheader label="Product Quantity"></listheader>
+				<listheader label="Sub Total"></listheader>
+			</listhead>
+			<template name="model">
+				<listitem>
+					<listcell label="@load(each.orderId)"/>
+					<listcell label="@load(each.prodName)"/>
+					<listcell label="@load(each.prodPrice)"/>
+					<listcell label="@load(each.prodQty)"/>
+					
+				</listitem>
+			</template>
+		</listbox>
+		
+	</window>
+	
+
+</zk>

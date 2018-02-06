@@ -1,7 +1,7 @@
 <?page title="Product" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window title="new page title" border="normal" apply="org.zkoss.bind.BindComposer"
-	viewModel="@id('vm') @init('vmd.CustomerVmd')">
+	viewModel="@id('vm') @init('vmd.OrderDetailVmd')">
 		Search:
 		<textbox value="@save(vm.search)"></textbox>
 		<button label="Search" onClick="@command('search')"></button>
@@ -12,19 +12,23 @@
 		<button label="Edit" onClick="@command('edit')"></button>
 	
   		
-  		<listbox model="@load(vm.customerDtos)" selectedItem="@bind(vm.customerDto)" emptyMessage="kosong"
+  		<listbox model="@load(vm.orderDetailDtos)" selectedItem="@bind(vm.orderDetailDto)" emptyMessage="kosong"
   			id="box" mold="paging" pagingPosition="bottom" pageSize="5"
   		>
 			<listhead>
-				<listheader label="Customer Id"></listheader>
-				<listheader label="Name"></listheader>
-				<listheader label="Address"></listheader>
+				<listheader label="Order Id"></listheader>
+				<listheader label="Product Id"></listheader>
+				<listheader label="Product Price"></listheader>
+				<listheader label="Product Quantity"></listheader>
+				<listheader label="Sub Total"></listheader>
 			</listhead>
 			<template name="model">
 				<listitem>
-					<listcell label="@load(each.custId)"/>
-					<listcell label="@load(each.custName)"/>
-					<listcell label="@load(each.custAddress)"/>
+					<listcell label="@load(each.orderId)"/>
+					<listcell label="@load(each.prodId)"/>
+					<listcell label="@load(each.prodPrice)"/>
+					<listcell label="@load(each.prodQty)"/>
+					<listcell label="@load(each.subTotal)"/>
 				</listitem>
 			</template>
 		</listbox>

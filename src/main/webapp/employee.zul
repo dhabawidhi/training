@@ -24,7 +24,7 @@
 				<listitem>
 					<listcell label="@load(each.empId)"/>
 					<listcell label="@load(each.empName)"/>
-					<listcell label="@load(each.empDOB)"/>
+					<listcell label="@load(each.empDOB) @converter('formatedDate',format='d MMMM yyyy')"/>
 					<listcell label="@load(each.empHeight)"/>
 				</listitem>
 			</template>
