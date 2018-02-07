@@ -1,8 +1,10 @@
 package vmd;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.zkoss.bind.BindUtils;
@@ -18,6 +20,7 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Messagebox.Button;
 import org.zkoss.zul.Messagebox.ClickEvent;
+import org.zkoss.zul.Window;
 
 import dto.CustomerDto;
 import dto.OrderDetailDto;
@@ -39,6 +42,10 @@ public class OrderDetailVmd {
 	@WireVariable
 	private ProductSvc productSvc;
 	
+	@WireVariable
+	private OrderDetailSvc orderDetailSvc;
+	
+	
 	private OrderDto orderDto;
 	private List<CustomerDto> customerDtos;
 	private List<OrderDetailDto> orderDetailDtos = new ArrayList<OrderDetailDto>();
@@ -46,7 +53,26 @@ public class OrderDetailVmd {
 	private boolean statusPopUp;
 	private List<ProductDto> productDtos;
 	private ProductDto productDto;
+	private CustomerDto customerDto;
+	private int counterCekDto;
 	
+	
+
+	public int getCounterCekDto() {
+		return counterCekDto;
+	}
+
+	public void setCounterCekDto(int counterCekDto) {
+		this.counterCekDto = counterCekDto;
+	}
+
+	public CustomerDto getCustomerDto() {
+		return customerDto;
+	}
+
+	public void setCustomerDto(CustomerDto customerDto) {
+		this.customerDto = customerDto;
+	}
 
 	public OrderSvc getOrderSvc() {
 		return orderSvc;
@@ -133,8 +159,29 @@ public class OrderDetailVmd {
 	@Init
 	public void load()
 	{
-		orderDto=(OrderDto) Sessions.getCurrent().getAttribute("dto");
-		customerDtos=customerSvc.findAll();
+		orderDto = (OrderDto) Sessions.getCurrent().getAttribute("dto");
+		customerDtos = customerSvc.findAll();
+		productDtos = productSvc.findAll();
+		if(orderDto.getOrderId() != null){
+			customerDto = customerSvc.findOne(orderDto.getCustId());
+			orderDetailDtos = orderDto.getOrderDetailDtos();
+			
+		}
+		Sessions.getCurrent().setAttribute("orderDetailDtos", orderDetailDtos);
+		
+		orderDetailDtos = (List<OrderDetailDto>) Sessions.getCurrent().getAttribute("orderDetailDtosUpdate");
+		counterCekDto=0;
+	}
+	
+	@Command()
+	public void save()
+	{
+		orderDto.setOrderDetailDtos(orderDetailDtos);
+		orderDto.setCustId(customerDto.getCustId());
+		
+		orderSvc.save(orderDto);
+		Messagebox.show("Data berhasil disimpan");
+		Executions.sendRedirect("order.zul");
 	}
 	
 	@Command()
@@ -144,15 +191,62 @@ public class OrderDetailVmd {
 		
 	}
 	
-	@Command()
-	public void save()
+	@Command
+	@NotifyChange("orderDetailDtos")
+	public void deleteProduct()
 	{
-		orderSvc.save(orderDto);
-		Messagebox.show("Data berhasil disimpan");
-		Executions.sendRedirect("order.zul");
+		if(orderDetailDto!=null)
+		{
+			Messagebox.show("Apakah yakin mau di hapus?"," Perhatian",
+			new Button[]{Button.YES,Button.NO}, 
+			Messagebox.QUESTION,
+			Button.NO,
+			new EventListener<Messagebox.ClickEvent>()
+			{
+				public void onEvent(ClickEvent event)
+				{
+					if(Messagebox.ON_YES.equals(event.getName()))
+					{
+						orderDetailSvc.delete(orderDetailDto);
+						orderDetailDtos.remove(orderDetailDto);
+						orderDetailDto=null;
+						BindUtils.postNotifyChange(null, null, OrderDetailVmd.this, "orderDetailDtos");
+						Messagebox.show("Data berhasil di hapus");
+						
+					}
+					
+					
+				}
+				
+			});
+			
+		}
+		else {
+			Messagebox.show("Silahkan pilih data");
+		}
+		
 	}
 	
 	
+	@Command
+	@NotifyChange("orderDetailDtos")
+	public void addProduct() {
+        // TOS should be checked before accepting order
+//        if(tosCheckbox.isChecked()) {
+//            carService.order(((ListModelList<OrderItem>)orderItemsModel));
+            // show result
+//            Map<String, Object> arguments = new HashMap<String, Object>();
+//            arguments.put("orderItems", orderItemsModel);
+//            arguments.put("totalPrice", getTotalPrice());
+		Map<String, Object> arguments = new HashMap<String, Object>();
+        arguments.put("orderId", orderDto.getOrderId());
+		String template = "/product_view.zul";
+        Window window = (Window)Executions.createComponents(template, null, arguments);
+        window.doModal();
+        
+        counterCekDto=1;
+        
+    }
 	
 	/*
 	@WireVariable

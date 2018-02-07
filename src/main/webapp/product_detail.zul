@@ -25,7 +25,7 @@
 			</row>
 			<row>
 				<label value='Price'/>
-				<intbox constraint="no empty, no negative" value="@bind(vm.productDto.prodPrice) @save(vm.productDto.prodPrice)"></intbox>
+				<intbox constraint="no empty, no negative" value="@bind(vm.productDto.prodPrice) @save(vm.productDto.prodPrice)" readonly="true"></intbox>
 			</row>
 		</rows>
 	</grid>

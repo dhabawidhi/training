@@ -68,6 +68,7 @@ public class ProductVmd {
 	@Init
 	public void load()
 	{
+		
 		productDtos=productSvc.findAll();
 		
 	}

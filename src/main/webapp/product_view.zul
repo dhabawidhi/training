@@ -1,0 +1,40 @@
+<window id="productView" title="Order Result" width="500px" border="normal"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('vmd.ProductViewVmd')" closable="true"
+>
+	
+    <hlayout>
+	    ${arg.orderId } 
+		<button label="Back" onClick="productView.detach()"></button>
+		<button label="Save" onClick="@command('saveProduct', window='productView') "></button>
+		 ${arg.orderId } 
+	</hlayout>
+	<grid>
+		<rows>
+			<row>
+				<label value='Product Name '/>
+				<combobox model="@load(vm.productDtos)" selectedItem="@bind(vm.productDto)">
+					<template name="model">
+						<comboitem label="@load(each.prodName)" value="@load(each.prodId)"></comboitem>	
+					</template>
+				</combobox>
+			</row>
+			<row>
+				<label value='Price'/>
+				<intbox constraint="no empty, no negative" value="@bind(vm.productDto.prodPrice)" onChange="@command('calculate')" readonly="true" ></intbox>
+			</row>
+			<row>
+				<label value='Qty'/>
+				<intbox constraint="no empty, no negative" value="@bind(vm.quantity)" onChange="@command('calculate')"></intbox>
+			</row>
+			<row>
+				<label value='Sub Total'/>
+				<intbox constraint="no empty, no negative" value="@bind(vm.subTotal)" readonly="true"></intbox>
+			</row>
+			<row>
+				<label value='order Id'/>
+				<textbox constraint="no empty, no negative" value="${arg.orderId}" readonly="true"></textbox>
+			</row>
+		</rows>
+	</grid>
+</window>

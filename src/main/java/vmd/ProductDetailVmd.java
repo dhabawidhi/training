@@ -8,6 +8,7 @@ import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Messagebox;
 
+import dto.OrderDetailDto;
 import dto.ProductDto;
 import service.ProductSvc;
 
@@ -39,6 +40,8 @@ public class ProductDetailVmd {
 	{
 		productDto=(ProductDto) Sessions.getCurrent().getAttribute("dto");
 		
+		OrderDetailDto orderDetailDto2=new OrderDetailDto();
+		orderDetailDto2=(OrderDetailDto) Sessions.getCurrent().getAttribute("dtoAdd");
 	}
 	
 	@Command()

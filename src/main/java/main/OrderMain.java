@@ -30,6 +30,8 @@ public class OrderMain {
 	 		
 	 		System.out.println(x[1]);
  		}
+	 	
+	 	
 	
 	 	/*
 	 	OrderDetailDao orderDetailDao = ctx.getBean(OrderDetailDao.class);

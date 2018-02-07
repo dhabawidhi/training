@@ -41,7 +41,7 @@ public class OrderDetailDto {
 		this.prodQty = prodQty;
 	}
 	public int getSubTotal() {
-		return subTotal;
+		return prodQty*prodPrice;
 	}
 	public void setSubTotal(int subTotal) {
 		this.subTotal = subTotal;

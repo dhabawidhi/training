@@ -27,11 +27,13 @@ import service.OrderSvc;
 @Service("orderSvc") // copy nama interface dan buat jadi huruf kecil nama servicenya
 @Transactional
 public class OrderSvcImpl implements OrderSvc {
-	@Autowired
-	private OrderDao orderDao;
+	
 	
 	@Autowired
 	private OrderDetailDao orderDetailDao;
+	
+	@Autowired
+	private OrderDao orderDao;
 	
 	@Override
 	public List<OrderDto> findAll() {
@@ -59,6 +61,31 @@ public class OrderSvcImpl implements OrderSvc {
 		order.setTotal(orderDto.getTotal());
 		
 		orderDao.save(order);
+		/*
+		OrderDetailDto orderDetailDto=(OrderDetailDto) orderDto.getOrderDetailDtos();
+		OrderDetail orderDetail=new OrderDetail();
+		orderDetail.setOrderId(orderDetailDto.getOrderId());
+		orderDetail.setProdId(orderDetailDto.getProdId());
+		orderDetail.setProdPrice(orderDetail.getProdPrice());
+		orderDetail.setProdQty(orderDetail.getProdQty());
+		orderDetail.setSubTotal(orderDetail.getSubTotal());
+		*/
+		for(OrderDetailDto orderDetailDto:orderDto.getOrderDetailDtos())
+		{
+			OrderDetail orderDetail=new OrderDetail();
+			System.out.println("orderdto\t"+orderDetailDto.getOrderId());
+			System.out.println("proddto\t"+orderDetailDto.getProdId());
+			System.out.println("priceto\t"+orderDetailDto.getProdPrice());
+			System.out.println("prodqtydto\t"+orderDetailDto.getProdQty());
+			System.out.println("subtotaldto\t"+orderDetailDto.getSubTotal());
+			
+			orderDetail.setOrderId(orderDetailDto.getOrderId());
+			orderDetail.setProdId(orderDetailDto.getProdId());
+			orderDetail.setProdPrice(orderDetailDto.getProdPrice());
+			orderDetail.setProdQty(orderDetailDto.getProdQty());
+			orderDetail.setSubTotal(orderDetailDto.getSubTotal());
+			orderDetailDao.save(orderDetail);
+		}
 		
 	}
 
@@ -96,11 +123,12 @@ public class OrderSvcImpl implements OrderSvc {
 			OrderDto orderDto=new OrderDto();
 			orderDto.setOrderId((String) order[0]);
 			orderDto.setCustId((int) order[1]);;
-			orderDto.setTotal((int) order[2]);
+//			orderDto.setTotal((int) order[2]);
 			orderDto.setCustName((String) order[3]);
 			
 			List<OrderDetailDto> orderDetailDtos=new ArrayList<OrderDetailDto>();
-			List<Object[]> orderDetailList=orderDetailDao.findAllOrderDetail((String) order[0]);	
+			List<Object[]> orderDetailList=orderDetailDao.findAllOrderDetail((String) order[0]);
+			int total=0;
 			for(Object[] od:orderDetailList)
 			{
 				OrderDetailDto orderDetailDto=new OrderDetailDto();
@@ -110,10 +138,11 @@ public class OrderSvcImpl implements OrderSvc {
 				orderDetailDto.setProdPrice(orderDetail.getProdPrice());
 				orderDetailDto.setProdQty(orderDetail.getProdQty());
 				orderDetailDto.setSubTotal(orderDetail.getSubTotal());
+				total=total+orderDetail.getProdPrice()*orderDetail.getProdQty();
 				orderDetailDto.setProdName((String) od[1]);
 				orderDetailDtos.add(orderDetailDto);
 			}
-			
+			orderDto.setTotal(total);
 			orderDto.setOrderDetailDtos(orderDetailDtos);
 			
 	

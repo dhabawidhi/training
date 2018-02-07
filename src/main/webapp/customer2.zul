@@ -99,9 +99,9 @@
 	</vlayout>
 	<textbox id="opt" value=""/>
 	<window title="Checkbox demo" border="normal" width="350px">
-	<checkbox value="A" id="apple" label="Apple" onCheck="doChecked()"/>
-	<checkbox value="B" id="orange" label="Orange" onCheck="doChecked()"/>
-	<checkbox value="C" id="banana" label="Banana" onCheck="doChecked()"/>
+	<checkbox value="1" id="apple" label="Apple" onCheck="doChecked()"/>
+	<checkbox value="2" id="orange" label="Orange" onCheck="doChecked()"/>
+	<checkbox value="3" id="banana" label="Banana" onCheck="doChecked()"/>
 	<hbox>
 		You have selected:
 		<label id="fruit"/>
@@ -109,9 +109,9 @@
 	
 	<zscript>
 		void doChecked(){
-			fruit.value=(apple.isChecked() ? apple.label+' ':&quot;&quot;)
-			+(orange.isChecked()? orange.label+' ':&quot;&quot;)
-			+(banana.isChecked()? banana.label+' ':&quot;&quot;);
+			fruit.value=(apple.isChecked() ? apple.value*10+' ':&quot;&quot;)
+			+(orange.isChecked()? orange.value+' ':&quot;&quot;)
+			+(banana.isChecked()? banana.value+' ':&quot;&quot;);
 		}
 	
 	
